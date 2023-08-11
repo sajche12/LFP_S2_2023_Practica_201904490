@@ -1,0 +1,10 @@
+Informe de Inventario:
+
+Producto	Cantidad	Precio unitario		Valor Total	Ubicacion
+------------------------------------------------------------------------------------
+Manzanas		Q150		Q2.50		Q375.0		BodegaA
+Peras		Q30		Q3.00		Q90.0		BodegaB
+Platanos		Q95		Q1.75		Q166.25		BodegaC
+Uvas		Q60		Q1.25		Q75.0		BodegaA
+Mandarinas		Q90		Q2.60		Q234.0		BodegaB
+Aguacates		Q30		Q3.40		Q102.0		BodegaC

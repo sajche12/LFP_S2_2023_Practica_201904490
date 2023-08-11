@@ -1,0 +1,6 @@
+crear_producto Manzanas;100;2.50;BodegaA
+crear_producto Peras;50;3.00;BodegaB
+crear_producto Platanos;75;1.75;BodegaC
+crear_producto Uvas;60;1.25;BodegaA
+crear_producto Mandarinas;80;2.60;BodegaB
+crear_producto Aguacates;35;3.40;BodegaC
