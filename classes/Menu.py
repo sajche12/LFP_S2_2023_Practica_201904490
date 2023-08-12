@@ -36,6 +36,7 @@ class Menu:
             print(f"Nombre: {producto.nombre}, Cantidad: {producto.cantidad}, Precio unitario: {producto.precio_unitario}, Ubicacion: {producto.ubicacion}")
             print("---------------------------------------------------------------------------")
         print()
+        root.destroy()
         self.menu_principal()
         
     def cargar_movimientos(self):
@@ -93,7 +94,9 @@ class Menu:
                 print("-----------------------------------------------------------------------------\n")
         else:
             print("\nEl archivo que seleccionaste no tiene terminacion .inv.\n")
+        root.destroy()
         self.menu_principal()
+        
     
     def crear_informe_inventario(self):
         #exportar en un archivo .txt la informacion de cada producto
@@ -111,11 +114,12 @@ class Menu:
         
     
     def menu_principal(self):
-        print("--- Menu ---")
-        print("1. Cargar inventario inicial")
-        print("2. Cargar instrucciones de movimientos")
-        print("3. Crear informe de inventario")
-        print("4. Salir")
+        print("-------------- MENU PRINCIPAL -------------")
+        print("| 1. Cargar inventario inicial            |")
+        print("| 2. Cargar instrucciones de movimientos  |")
+        print("| 3. Crear informe de inventario          |")
+        print("| 4. Salir                                |")
+        print("-------------------------------------------")
         # Validar que la opción ingresada sea un número
         try:
             opcion = int(input("\nIngrese una opción: "))
