@@ -57,7 +57,7 @@ class Menu:
                     #separar cada linea por comas
                     datos = linea.split(";")
                     #convertir datos[1] a entero
-                    datos[1] = int(datos[1])
+                    entero = int(datos[1])
                     #verificar si datos[0] contine la cadena "agregar_stock " o "vender_producto "
                     if datos[0].startswith("agregar_stock "):
                         producto_agregar = datos[0].replace("agregar_stock ", "")
@@ -68,7 +68,7 @@ class Menu:
                             #verificar si el producto a agregar es igual al nombre del producto en la lista de productos
                             if producto_agregar == nombre_producto.nombre:
                                 #actulizar la cantidad del producto en la lista de productos
-                                nombre_producto.cantidad += datos[1]
+                                nombre_producto.cantidad += entero
                                 print(f"El producto {producto_agregar} se actualizo correctamente, su nueva cantidad es {nombre_producto.cantidad}")
                                 producto_encontrado = True
                                 break
@@ -79,13 +79,14 @@ class Menu:
                         for nombre_producto in self.lista_productos.lista_productos:
                             encontrado = False
                             if producto_vender == nombre_producto.nombre:
-                                if datos[1] <= nombre_producto.cantidad:
+                                cantidad = int(nombre_producto.cantidad)
+                                if entero <= cantidad:
                                     #actualizar la cantidad del producto en la lista de productos
-                                    nombre_producto.cantidad -= datos[1]
-                                    print(f"El producto {producto_vender} se actualizo correctamente, su nueva cantidad es {nombre_producto.cantidad}")
+                                    cantidad -= entero
+                                    print(f"El producto {producto_vender} se actualizo correctamente, su nueva cantidad es {cantidad}")
                                     encontrado = True
                                     break
-                                elif datos[1] >= nombre_producto.cantidad:
+                                elif entero >= cantidad:
                                     print(f"El producto {producto_vender} no tiene suficiente cantidad para vender")
                                     encontrado = True
                                     break
