@@ -1,9 +1,12 @@
+
+
 class Nodo:
     def __init__(self, dato):
         self.dato = dato
         self.siguiente = None
 
 class ListaSimple:
+    
     # Constructor
     def __init__(self):
         self.primero = None
@@ -35,4 +38,15 @@ class ListaSimple:
             if actual.dato == dato:
                 return actual.dato
             actual = actual.siguiente
-        return None  
+        return None      
+    
+    #metodo para actualizar la cantidad en self.productos.lista_productos de un producto
+    def actualizar_cantidad(self, nombre, cantidad):
+        from classes.ListaProductos import ListaProductos
+        lista = ListaProductos()
+        for producto in lista.lista_productos:
+            if producto.nombre == nombre:
+                producto.cantidad = cantidad
+                break
+    
+    

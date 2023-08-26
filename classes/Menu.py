@@ -57,36 +57,42 @@ class Menu:
                     #separar cada linea por comas
                     datos = linea.split(";")
                     #convertir datos[1] a entero
-                    entero = int(datos[1])
+                    cantidad_agregar = int(datos[1])
                     #verificar si datos[0] contine la cadena "agregar_stock " o "vender_producto "
                     if datos[0].startswith("agregar_stock "):
                         producto_agregar = datos[0].replace("agregar_stock ", "")
-                        for nombre_producto in self.lista_productos.lista_productos:
-                            #convertir nombre_producto.cantidad a entero
-                            nombre_producto.cantidad = int(nombre_producto.cantidad)
+                        for producto_lista in self.lista_productos.lista_productos:
+                            #convertir producto_lista.cantidad a entero
+                            cantidad_existente = int(producto_lista.cantidad)
                             producto_encontrado = False
                             #verificar si el producto a agregar es igual al nombre del producto en la lista de productos
-                            if producto_agregar == nombre_producto.nombre:
+                            if producto_agregar == producto_lista.nombre:
                                 #actulizar la cantidad del producto en la lista de productos
-                                nombre_producto.cantidad += entero
-                                print(f"El producto {producto_agregar} se actualizo correctamente, su nueva cantidad es {nombre_producto.cantidad}")
+                                cantidad_total = cantidad_existente + cantidad_agregar
+                                print(f"El producto {producto_agregar} se agrego correctamente, su nueva cantidad es {cantidad_total}")
+                                #Actualizando producto en la lista
+                                producto_actualizado = Producto(producto_lista.nombre, cantidad_total, producto_lista.precio_unitario, producto_lista.ubicacion)
+                                self.lista_productos.lista_productos.agregar(producto_actualizado)
                                 producto_encontrado = True
                                 break
                         if producto_encontrado == False:
                             print(f"El producto {producto_agregar} no existe en el inventario")
                     elif datos[0].startswith("vender_producto "):
                         producto_vender = datos[0].strip("vender_producto ")
-                        for nombre_producto in self.lista_productos.lista_productos:
+                        for producto_lista in self.lista_productos.lista_productos:
                             encontrado = False
-                            if producto_vender == nombre_producto.nombre:
-                                cantidad = int(nombre_producto.cantidad)
-                                if entero <= cantidad:
+                            if producto_vender == producto_lista.nombre:
+                                cantidad_existente = int(producto_lista.cantidad)
+                                if cantidad_agregar <= cantidad_existente:
                                     #actualizar la cantidad del producto en la lista de productos
-                                    cantidad -= entero
-                                    print(f"El producto {producto_vender} se actualizo correctamente, su nueva cantidad es {cantidad}")
+                                    cantidad_total = cantidad_existente - cantidad_agregar
+                                    print(f"El producto {producto_vender} se vendio correctamente, su nueva cantidad es {cantidad_total}")
+                                    #actualizar producto en la lista
+                                    producto_actualizado = Producto(producto_lista.nombre, cantidad_total, producto_lista.precio_unitario, producto_lista.ubicacion)
+                                    self.lista_productos.lista_productos.agregar(producto_actualizado)
                                     encontrado = True
                                     break
-                                elif entero >= cantidad:
+                                elif cantidad_agregar >= cantidad_existente:
                                     print(f"El producto {producto_vender} no tiene suficiente cantidad para vender")
                                     encontrado = True
                                     break
@@ -107,8 +113,8 @@ class Menu:
             f.write("------------------------------------------------------------------------------------\n")
             valor_total_producto = 0
             for producto in self.lista_productos.lista_productos:
-                valor_total_producto = float(producto.cantidad) * float(producto.precio_unitario)
-                f.write(f"{producto.nombre}\t\tQ{producto.cantidad}\t\tQ{producto.precio_unitario}\t\tQ{valor_total_producto}\t\t{producto.ubicacion}\n")
+                valor_total_producto = round(float(producto.cantidad) * float(producto.precio_unitario), 2)
+                f.write(f"{producto.nombre}\t\t{producto.cantidad}\t\tQ{producto.precio_unitario}\t\tQ{valor_total_producto}\t\t{producto.ubicacion}\n")
         print("\n¡Informe de inventario creado correctamente!\n")
         
         self.menu_principal()
